@@ -1,23 +1,265 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
-$(function () {
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
-});
+
+
+//variables set for each timeslot textarea and button
+
+var timeDisplayE1 = $('#time-display');
+var btn9 = $('.btn9');
+var area9 = $('.area9');
+var btn10 = $('.btn10');
+var area10 = $('.area10');
+var btn11 = $('.btn11');
+var area11 = $('.area11');
+var btn12 = $('.btn12');
+var area12 = $('.area12');
+var btn1 = $('.btn1');
+var area1 = $('.area1');
+var btn2 = $('.btn2');
+var area2 = $('.area2');
+var btn3 = $('.btn3');
+var area3 = $('.area3');
+var btn4 = $('.btn4');
+var area4 = $('.area4');
+var btn5 = $('.btn5');
+var area5 = $('.area5');
+var hour9 = $('#hour-9');
+var hour10 = $('#hour-10');
+var hour11 = $('#hour-11');
+var hour12 = $('#hour-12');
+var hour1 = $('#hour-1');
+var hour2 = $('#hour-2');
+var hour3 = $('#hour-3');
+var hour4 = $('#hour-4');
+var hour5 = $('#hour-5');
+
+
+//function to display current time in header.
+function displayTime(){
+  var rightNow = dayjs().format('MMM DD, YYYY [at] hh:mm:ss a');
+  timeDisplayE1.text(rightNow);
+}
+
+//function to display ticking seconds
+setInterval(displayTime, 1000);
+
+
+//function to change color of timeslot depending on realtime hour
+function colorSet(){
+  var hour = dayjs().startOf('hour');
+  console.log(hour);
+
+  if (hour = 9){
+    hour9.addClass('present');
+    hour10.addClass('future');
+    hour11.addClass('future');
+    hour12.addClass('future');
+    hour1.addClass('future');
+    hour2.addClass('future');
+    hour3.addClass('future');
+    hour4.addClass('future');
+    hour5.addClass('future');
+  } else if (hour = 10){
+    hour9.addClass('past');
+    hour10.addClass('present');
+    hour11.addClass('future');
+    hour12.addClass('future');
+    hour1.addClass('future');
+    hour2.addClass('future');
+    hour3.addClass('future');
+    hour4.addClass('future');
+    hour5.addClass('future');
+  } else if (hour = 11){
+    hour9.addClass('past');
+    hour10.addClass('past');
+    hour11.addClass('present');
+    hour12.addClass('future');
+    hour1.addClass('future');
+    hour2.addClass('future');
+    hour3.addClass('future');
+    hour4.addClass('future');
+    hour5.addClass('future');
+  } else if (hour = 12){
+    hour9.addClass('past');
+    hour10.addClass('past');
+    hour11.addClass('past');
+    hour12.addClass('present');
+    hour1.addClass('future');
+    hour2.addClass('future');
+    hour3.addClass('future');
+    hour4.addClass('future');
+    hour5.addClass('future');
+  } else if (hour = 1){
+    hour9.addClass('past');
+    hour10.addClass('past');
+    hour11.addClass('past');
+    hour12.addClass('past');
+    hour1.addClass('present');
+    hour2.addClass('future');
+    hour3.addClass('future');
+    hour4.addClass('future');
+    hour5.addClass('future');
+  } else if (hour = 2){
+    hour9.addClass('past');
+    hour10.addClass('past');
+    hour11.addClass('past');
+    hour12.addClass('past');
+    hour1.addClass('past');
+    hour2.addClass('present');
+    hour3.addClass('future');
+    hour4.addClass('future');
+    hour5.addClass('future');
+  } else if (hour = 3){
+    hour9.addClass('past');
+    hour10.addClass('past');
+    hour11.addClass('past');
+    hour12.addClass('past');
+    hour1.addClass('past');
+    hour2.addClass('past');
+    hour3.addClass('present');
+    hour4.addClass('future');
+    hour5.addClass('future');
+  } else if (hour = 4){
+    hour9.addClass('past');
+    hour10.addClass('past');
+    hour11.addClass('past');
+    hour12.addClass('past');
+    hour1.addClass('past');
+    hour2.addClass('past');
+    hour3.addClass('past');
+    hour4.addClass('present');
+    hour5.addClass('future');
+  } else if (hour = 5){
+    hour9.addClass('past');
+    hour10.addClass('past');
+    hour11.addClass('past');
+    hour12.addClass('past');
+    hour1.addClass('past');
+    hour2.addClass('past');
+    hour3.addClass('past');
+    hour4.addClass('past');
+    hour5.addClass('present');
+  } else {
+    hour9.addClass('future');
+    hour10.addClass('future');
+    hour11.addClass('future');
+    hour12.addClass('future');
+    hour1.addClass('future');
+    hour2.addClass('future');
+    hour3.addClass('future');
+    hour4.addClass('future');
+    hour5.addClass('future');
+  }
+}
+colorSet();
+
+//sets text to local storage
+btn9.on('click', function(){
+  localStorage.setItem('Item9', area9.val());
+})
+
+btn10.on('click', function(){
+  localStorage.setItem('Item10', area10.val());
+})
+
+btn11.on('click', function(){
+  localStorage.setItem('Item11', area11.val());
+})
+
+btn12.on('click', function(){
+  localStorage.setItem('Item12', area12.val());
+})
+
+btn1.on('click', function(){
+  localStorage.setItem('Item1', area1.val());
+})
+
+btn2.on('click', function(){
+  localStorage.setItem('Item2', area2.val());
+})
+
+btn3.on('click', function(){
+  localStorage.setItem('Item3', area3.val());
+})
+
+btn4.on('click', function(){
+  localStorage.setItem('Item4', area4.val());
+})
+
+btn5.on('click', function(){
+  localStorage.setItem('Item5', area5.val());
+})
+
+//Storage Items retrieved
+var text9 = localStorage.getItem('Item9');
+var text10 = localStorage.getItem('Item10');
+var text11 = localStorage.getItem('Item11');
+var text12 = localStorage.getItem('Item12');
+var text1 = localStorage.getItem('Item1');
+var text2 = localStorage.getItem('Item2');
+var text3 = localStorage.getItem('Item3');
+var text4 = localStorage.getItem('Item4');
+var text5 = localStorage.getItem('Item5');
+
+//list items created with text retrieved from local storage
+var listhour9 = $('#listHour9');
+
+var list9 = [];
+
+list9.push(text9);
+listhour9.append(list9);
+
+
+var listhour10 = $('#listHour10');
+
+var list10 = [];
+
+list10.push(text10);
+listhour10.append(list10);
+
+var listhour11 = $('#listHour11');
+
+var list11 = [];
+
+list11.push(text11);
+listhour11.append(list11);
+
+var listhour12 = $('#listHour12');
+
+var list12 = [];
+
+list12.push(text12);
+listhour12.append(list12);
+
+var listhour1 = $('#listHour1');
+
+var list1 = [];
+
+list1.push(text1);
+listhour1.append(list1);
+
+var listhour2 = $('#listhour2');
+
+var list2 = [];
+
+list2.push(text2);
+listhour2.append(list2);
+
+var listhour3 = $('#listHour3');
+
+var list3 = [];
+
+list3.push(text3);
+listhour3.append(list3);
+
+var listhour4 = $('#listHour4');
+
+var list4 = [];
+
+list4.push(text4);
+listhour4.append(list4);
+
+var listhour5 = $('#listHour5');
+
+var list5 = [];
+
+list5.push(text5);
+listhour5.append(list5);
